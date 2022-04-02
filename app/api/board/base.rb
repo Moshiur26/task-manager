@@ -31,9 +31,12 @@ module Board
 
     helpers do
       def authenticated!
-        payload = JsonWebToken.decode(bearer_token)
-        payload['exp'] >= Time.now.to_i &&
-          @current_user = Admin.find_by(id: payload['sub'])
+        # binding.break
+
+        auth_key = AuthorizationKey.find_by(token: bearer_token)
+        if auth_key.present? && !auth_key.is_expired?
+          @current_user = auth_key.authable
+        end
       rescue StandardError => ex
         Rails.logger.error "Error occurs during Authentication. Message: #{ex.full_message}"
         error!('Something went wrong', 500)

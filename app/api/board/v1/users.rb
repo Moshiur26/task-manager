@@ -32,6 +32,24 @@ module Board
           Rails.logger.error "\n#{__FILE__}\nUser login failed due to: #{error.message}"
           error! failure_response_with_json("User login failed due to: #{error.message}", HTTP_CODE[:FORBIDDEN]), HTTP_CODE[:OK]
         end
+
+        desc 'User Logout.'
+        # route_setting :authentication, optional: true
+        delete :logout do
+          bearer_token = request.headers.fetch('Authorization', '').split(' ').last
+          if JsonWebToken.remove_token(bearer_token)
+            {
+              success: true,
+              status: 200,
+              message: 'Successfully logout',
+            }
+          else
+            error!(failure_response_with_json('User logout failed', HTTP_CODE[:NOT_ACCEPTABLE]), HTTP_CODE[:OK])
+          end
+        rescue StandardError => error
+          Rails.logger.error "\n#{__FILE__}\nUser logout failed due to: #{error.message}"
+          error! failure_response_with_json("User logout failed due to: #{error.message}", HTTP_CODE[:NOT_ACCEPTABLE]), HTTP_CODE[:OK]
+        end
       end
     end
   end
