@@ -2,7 +2,7 @@ module Board
   class Base < Grape::API
     # Contains all the constant that will be used for development
     include Board::V1::Helpers::Constants
-    include Board::Kaminari
+    include Grape::Kaminari
 
     # Helpers to send success or failure message to frontend
     helpers Board::V1::Helpers::ResponseHelper
@@ -45,6 +45,8 @@ module Board
     end
 
     @error = []
+
+    mount V1::Users
 
     HTTP_ERROR = [400, 401, 403, 404, 422, 500, 503, 999].freeze
   end
