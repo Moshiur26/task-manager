@@ -1,4 +1,4 @@
-module Board::V1::Helpers
+module BoardPanel::V1::Helpers
   module Constants
     HTTP_CODE = {
       OK: 200,

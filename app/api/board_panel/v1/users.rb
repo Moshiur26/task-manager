@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Board
+module BoardPanel
   module V1
-    class Users < Board::Base
+    class Users < BoardPanel::Base
       resource '/' do
         params do
           requires :username, type: String

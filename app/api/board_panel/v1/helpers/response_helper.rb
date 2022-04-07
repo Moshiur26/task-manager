@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-module Board::V1::Helpers
+module BoardPanel::V1::Helpers
   module ResponseHelper
     extend Grape::API::Helpers
 

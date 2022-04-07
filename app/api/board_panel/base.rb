@@ -1,11 +1,11 @@
-module Board
+module BoardPanel
   class Base < Grape::API
     # Contains all the constant that will be used for development
-    include Board::V1::Helpers::Constants
+    include BoardPanel::V1::Helpers::Constants
     include Grape::Kaminari
 
     # Helpers to send success or failure message to frontend
-    helpers Board::V1::Helpers::ResponseHelper
+    helpers BoardPanel::V1::Helpers::ResponseHelper
 
     helpers CommonHelper
 
