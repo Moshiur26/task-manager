@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :trackable
   has_many :authorization_keys
   has_many :tasks
+  has_many :board_users
+  has_many :boards, through: :board_users
 
   validates :name, :phone, :email, :password, :password_confirmation, presence: true
   validates :email, :phone, uniqueness: true
