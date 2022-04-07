@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_02_121732) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_07_200038) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_02_121732) do
     t.datetime "expiry"
     t.integer "authable_id", null: false
     t.string "authable_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.string "title"
+    t.string "description"
+    t.integer "status", default: 0
+    t.float "hours"
+    t.datetime "planned_start_date"
+    t.datetime "planned_end_date"
+    t.datetime "actual_start_date"
+    t.datetime "actual_end_date"
+    t.text "content"
+    t.bigint "board_id"
+    t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
