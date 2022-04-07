@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :trackable
   has_many :authorization_keys
+  has_many :tasks
 
   validates :name, :phone, :email, :password, :password_confirmation, presence: true
   validates :email, :phone, uniqueness: true
